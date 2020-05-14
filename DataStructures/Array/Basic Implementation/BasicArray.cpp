@@ -87,6 +87,24 @@ public:
 			this->count=this->count+1;
 		}
 	}
+	int search(T k)
+	{
+		//Searches for the index of the given value. If no such value found, returns -1
+		//Complexity = O(N)
+		int i=0;
+		while(i<this->count)
+		{
+			if(this->arr[i]==k)
+			{
+				return i;
+			}
+			else
+			{
+				i++;
+			}
+		}
+		return -1;
+	}
 
 };
 
@@ -95,6 +113,7 @@ int main()
 	Array<int> *a;
 	int c=1;
 	int k=0,p=0;
+	int ret=1;
 	int flag=0;
 	cout<<"INTEGER ARRAY"<<endl;
 	while(c!=0)
@@ -125,7 +144,7 @@ int main()
 		{
 			cout<<"Enter 2 to insert value into the array, followed by the value"<<endl;
 			cout<<"Enter 3 to insert value into given position, followed by value and position"<<endl;
-			cout<<"Enter 4 to search for an element in the array,followed by the element"<<endl;
+			cout<<"Enter 4 to search for index of an element in the array,followed by the element"<<endl;
 			cout<<"Enter 5 to find value at a given index, followed by the index"<<endl;
 			cout<<"Enter 6 to delete a particular value, followed by the value"<<endl;
 			cout<<"Enter 7 to check if array is Empty"<<endl;
@@ -148,6 +167,15 @@ int main()
 				case 3:
 					cin>>k>>p;
 					a->insert_at(k,p);
+					break;
+				case 4:
+					cin>>k;
+					ret=a->search(k);
+					if(ret!=-1)
+						cout<<k<<" FOUND AT INDEX "<<ret<<endl;
+					else
+						cout<<"NO SUCH VALUE FOUND!!!"<<endl;
+					break;
 				case 10:
 					a->printArray();
 					break;
