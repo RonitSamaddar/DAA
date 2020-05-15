@@ -119,6 +119,28 @@ public:
 			return this->arr[k];
 		}
 	}
+	void remove(int k)
+	{
+		//Deletes tha given value from the array.
+		//Complexity = O(N)
+
+		if(this->count==0)
+		{
+			cout<<"ARRAY IS EMPTY!!"<<endl;
+			return;
+		}
+		int index=this->search(k);
+		if(index==-1)
+		{
+			cout<<"NO SUCH VALUE FOUND!!"<<endl;
+			return;
+		}
+		for(int i=index+1;i<this->count;i++)
+		{
+			this->arr[i-1]=this->arr[i];
+		}
+		this->count=this->count-1;
+	}
 
 };
 
@@ -197,6 +219,10 @@ int main()
 					{
 						cout<<"ARRAY["<<k<<"] = "<<ret<<endl;
 					}
+					break;
+				case 6:
+					cin>>k;
+					a->remove(k);
 					break;
 				case 10:
 					a->printArray();
