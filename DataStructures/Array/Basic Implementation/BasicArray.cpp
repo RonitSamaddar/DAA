@@ -105,6 +105,20 @@ public:
 		}
 		return -1;
 	}
+	int retrieve(int k)
+	{
+		//Retrieves the value at the given index. On failure,returns -1
+		//Complexity = O(1)
+		if(k>=this->count)
+		{
+			cout<<"INVALID INDEX!!!!"<<endl;
+			return -1;
+		}
+		else
+		{
+			return this->arr[k];
+		}
+	}
 
 };
 
@@ -175,6 +189,14 @@ int main()
 						cout<<k<<" FOUND AT INDEX "<<ret<<endl;
 					else
 						cout<<"NO SUCH VALUE FOUND!!!"<<endl;
+					break;
+				case 5:
+					cin>>k;
+					ret=a->retrieve(k);
+					if(ret!=-1)
+					{
+						cout<<"ARRAY["<<k<<"] = "<<ret<<endl;
+					}
 					break;
 				case 10:
 					a->printArray();
