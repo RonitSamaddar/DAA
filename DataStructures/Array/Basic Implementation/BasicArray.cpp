@@ -141,6 +141,19 @@ public:
 		}
 		this->count=this->count-1;
 	}
+	int isEmpty()
+	{
+		return(this->count==0);
+	}
+	int isFull()
+	{
+		return(this->count==this->cap);
+	}
+	int size()
+	{
+		return(this->count);
+	}
+
 
 };
 
@@ -178,7 +191,7 @@ int main()
 		}
 		else if(flag==1)
 		{
-			cout<<"Enter 2 to insert value into the array, followed by the value"<<endl;
+			cout<<"\nEnter 2 to insert value into the array, followed by the value"<<endl;
 			cout<<"Enter 3 to insert value into given position, followed by value and position"<<endl;
 			cout<<"Enter 4 to search for index of an element in the array,followed by the element"<<endl;
 			cout<<"Enter 5 to find value at a given index, followed by the index"<<endl;
@@ -223,6 +236,24 @@ int main()
 				case 6:
 					cin>>k;
 					a->remove(k);
+					break;
+				case 7:
+					ret=a->isEmpty();
+					if(ret)
+						cout<<"EMPTY!!"<<endl;
+					else
+						cout<<"NOT EMPTY!!"<<endl;
+					break;
+				case 8:
+					ret=a->isFull();
+					if(ret)
+						cout<<"FULL!!"<<endl;
+					else
+						cout<<"NOT FULL!!"<<endl;
+					break;
+				case 9:
+					ret=a->size();
+					cout<<"NUMBER OF ELEMENTS IN ARRAY = "<<ret<<endl;
 					break;
 				case 10:
 					a->printArray();
