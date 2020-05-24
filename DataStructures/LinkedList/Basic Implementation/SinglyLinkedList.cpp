@@ -9,6 +9,10 @@ private:
 	T val;
 	Node *next;
 public:
+	Node()
+	{
+		this->next=NULL;
+	}
 	Node(T v)
 	{
 		this->val=v;
@@ -32,11 +36,48 @@ public:
 	}
 
 };
+template <typename T>
+class LinkedList
+{
+private:
+	Node<T> *start;
+public:
+	LinkedList()
+	{
+		start=NULL;
+	}
+	void insert_start(T val)
+	{
+		Node<T> *temp=new Node<T>(val);
+		if(this->start==NULL)
+		{
+			//Empty List Case
+			this->start=temp;
+		}
+		else
+		{
+			//General case
+			temp->set_next(this->start);
+			this->start=temp;
+		}
+	}
+	void print_list()
+	{
+		Node<T> *temp=start;
+		while(temp!=NULL)
+		{
+			cout<<temp->get_data()<<" ";
+			temp=temp->get_next();
+		}
+		cout<<endl;
+
+	}
+
+};
 int main()
 {
-	Node<int> *N=new Node<int>(5);
-	Node<int> *M=new Node<int>(1);
-	N->set_next(M);
-	cout<<N->get_data()<<endl;
-	cout<<N->get_next()<<endl;
+	LinkedList<int> *L=new LinkedList<int>();
+	L->insert_start(1);
+	L->insert_start(2);
+	L->print_list();
 }
