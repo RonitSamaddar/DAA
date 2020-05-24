@@ -247,7 +247,7 @@ public:
 		}
 		
 	}
-	Node<T> *search(int val)
+	Node<T> *search(T val)
 	{
 		Node<T> *temp=this->start;
 		while(temp!=NULL)
