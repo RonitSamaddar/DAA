@@ -255,7 +255,7 @@ public:
 		}
 		return NULL;
 	}
-	T retreive(int pos)
+	T retrieve(int pos)
 	{
 		Node<T> *temp=this->start;
 		int index=1;
@@ -303,32 +303,118 @@ public:
 	}
 
 };
+
 int main()
 {
-	LinkedList<int> *L=new LinkedList<int>();
-	L->insert_end(1);
-	L->insert_start(2);
-	L->insert_end(3);
-	L->insert_pos(4,2);
-	L->insert_pos(5,4);
-	L->insert_pos(6,6);
-	Node<int> *res=L->search(4);
-	if(res==NULL)
+	LinkedList<int> *L;
+	int c=1;
+	int k=0,p=0;
+	int ret=1;
+	Node<int> *nret=NULL;
+	int flag=0;
+	cout<<"INTEGER LIST"<<endl;
+	while(c!=0)
 	{
-		cout<<"NOT FOUND!!"<<endl;
-	}
-	else
-	{
-		cout<<"FOUND !! NODE POINTER = "<<res<<endl;
-	}
-	cout<<"Value at position 4 = "<<L->retreive(4)<<endl;
-	cout<<"List isEmpty = "<<L->isEmpty()<<endl;
-	cout<<"Number of elements = "<<L->size()<<endl;
-	L->print_list();
 
-	L->delete_start();
-	L->delete_end();
-	L->delete_pos(3);
-	L->print_list();
+		if(flag==0)
+		{
+			cout<<"Enter 1 to create list"<<endl;
+			cout<<"Enter 0 to exit"<<endl;
+			cout<<"ENTER CHOICE"<<endl;
+			cin>>c;
+			switch(c)
+			{
+				case 0:
+					break;
+				case 1:
+					L=new LinkedList<int>();
+					flag=1;
+					break;
+				default:
+					cout<<"WRONG CHOICE!!!"<<endl;
+
+
+			}
+		}
+		else if(flag==1)
+		{
+			cout<<"\nEnter 1 to insert value at start, followed by the value"<<endl;
+			cout<<"Enter 2 to insert value at end, followed by the value"<<endl;
+			cout<<"Enter 3 to insert value into given position, followed by value and position"<<endl;
+			cout<<"Enter 4 to search for pointer to node containing a value,followed by the value"<<endl;
+			cout<<"Enter 5 to find value at a given position, followed by the position"<<endl;
+			cout<<"Enter 6 to delete start node"<<endl;
+			cout<<"Enter 7 to delete end node"<<endl;
+			cout<<"Enter 8 to delete node at a given position,followed by position"<<endl;
+			cout<<"Enter 9 to check if array is Empty"<<endl;
+			cout<<"Enter 10 to get present number of elements in array"<<endl;
+			cout<<"Enter 11 to print array"<<endl;
+		
+			cout<<"Enter 0 to exit"<<endl;
+			cout<<"ENTER CHOICE"<<endl;
+			cin>>c;
+			switch(c)
+			{
+				case 0:
+					break;
+				case 1:
+					cin>>k;
+					L->insert_start(k);
+					break;
+				case 2:
+					cin>>k;
+					L->insert_end(k);
+					break;
+				case 3:
+					cin>>k>>p;
+					L->insert_pos(k,p);
+					break;
+				case 4:
+					cin>>k;
+					nret=L->search(k);
+					if(nret!=NULL)
+						cout<<k<<" FOUND AT POINTER "<<nret<<endl;
+					else
+						cout<<"NO SUCH VALUE FOUND!!!"<<endl;
+					break;
+				case 5:
+					cin>>p;
+					ret=L->retrieve(p);
+					if(ret!='\0')
+					{
+						cout<<"ELEMENT AT POSITION p = "<<ret<<endl;
+					}
+					break;
+				case 6:
+					L->delete_start();
+					break;
+				case 7:
+					L->delete_end();
+					break;
+				case 8:
+					cin>>p;
+					L->delete_pos(p);
+					break;
+				case 9:
+					ret=L->isEmpty();
+					if(ret)
+						cout<<"EMPTY!!"<<endl;
+					else
+						cout<<"NOT EMPTY!!"<<endl;
+					break;
+				case 10:
+					ret=L->size();
+					cout<<"NUMBER OF ELEMENTS IN LIST = "<<ret<<endl;
+					break;
+				case 11:
+					L->print_list();
+					break;
+				default:
+					cout<<"INVALID CHOICE !!!"<<endl;
+					break;
+			}
+		}
+	}
+	return 1;
 
 }
