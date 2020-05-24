@@ -242,6 +242,51 @@ public:
 		}
 		
 	}
+	Node<T> *search(int val)
+	{
+		Node<T> *temp=this->start;
+		while(temp!=NULL)
+		{
+			if(temp->get_data()==val)
+			{
+				return temp;
+			}
+			temp=temp->get_next();
+		}
+		return NULL;
+	}
+	T retreive(int pos)
+	{
+		Node<T> *temp=this->start;
+		int index=1;
+		while(temp!=NULL)
+		{
+			if(index==pos)
+			{
+				return temp->get_data();
+			}
+			index++;
+			temp=temp->get_next();
+		}
+		return '\0';
+	}
+
+	int isEmpty()
+	{
+		return(this->start==NULL);
+	}
+	int size()
+	{
+		Node<T> *temp=this->start;
+		int sz=0;
+		while(temp!=NULL)
+		{
+			sz++;
+			temp=temp->get_next();
+		}
+		return sz;
+	}
+
 	void print_list()
 	{
 		//Prints each node as we traverse the entire list
@@ -267,9 +312,23 @@ int main()
 	L->insert_pos(4,2);
 	L->insert_pos(5,4);
 	L->insert_pos(6,6);
+	Node<int> *res=L->search(4);
+	if(res==NULL)
+	{
+		cout<<"NOT FOUND!!"<<endl;
+	}
+	else
+	{
+		cout<<"FOUND !! NODE POINTER = "<<res<<endl;
+	}
+	cout<<"Value at position 4 = "<<L->retreive(4)<<endl;
+	cout<<"List isEmpty = "<<L->isEmpty()<<endl;
+	cout<<"Number of elements = "<<L->size()<<endl;
 	L->print_list();
+
 	L->delete_start();
 	L->delete_end();
 	L->delete_pos(3);
 	L->print_list();
+
 }
