@@ -231,7 +231,7 @@ public:
 					p=p->get_next();
 					index++;
 				}
-				if(p->get_next()==NULL && index<pos-1)
+				if(p->get_next()==NULL)
 				{
 					//If we pos>(number of elements), then pos is invalid
 					cout<<"INVALID POSITION!! NO DELETION DONE."<<endl;
@@ -388,6 +388,10 @@ int main()
 					if(ret!='\0')
 					{
 						cout<<"ELEMENT AT POSITION p = "<<ret<<endl;
+					}
+					else
+					{
+						cout<<"INVALID POSITION"<<endl;
 					}
 					break;
 				case 6:
