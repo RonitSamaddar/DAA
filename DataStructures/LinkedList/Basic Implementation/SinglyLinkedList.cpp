@@ -98,9 +98,14 @@ public:
 			//Insert at beginning case
 			this->insert_start(val);
 		}
-		else
+		else if(start==NULL)
 		{
-			//General case
+			//but pos > 1
+			cout<<"INVALID POSITION!! NO INSERTION DONE."<<endl;
+		}
+		else		
+		{
+			//General case (atleast one node and pos>1)
 			int index=1;							//Current node number
 			Node<T> *temp=new Node<T>(val);
 			Node<T> *p=this->start;
@@ -113,7 +118,7 @@ public:
 				p=p->get_next();
 				index++;
 			}
-			if(p==NULL && index<pos-1)
+			if(p==NULL)
 			{
 				//If we pos>(number of elements+1), then pos is invalid
 				cout<<"INVALID POSITION!! NO INSERTION DONE."<<endl;
