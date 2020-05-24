@@ -1,2 +1,2 @@
-Single Linked List Implementation :
-        Finished insertion at beginning and printing list
+Double Linked List Implementation :
+		Basic Structure

@@ -60,15 +60,94 @@ public:
 	}
 	void insert_start(T val)
 	{
-
+		//Inserts node with value val at the beginning of the list
+		//Time Complexity = O(1)
+		//Space Complexity = O(1)
+		Node<T> *temp=new Node<T>(val);
+		if(this->start==NULL)
+		{
+			//Empty List Case
+			this->start=temp;
+		}
+		else
+		{
+			//General case
+			temp->set_next(this->start);
+			this->start->set_prev(temp);
+			this->start=temp;
+		}
 	}
 	void insert_end(T val)
 	{
-
+		cout<<"INSERT END!!"<<endl;
+		//Inserts node with value val at the end of the list
+		//Time Complexity = O(n)
+		//Space Complexity = O(1)
+		Node<T> *temp=new Node<T>(val);
+		if(this->start==NULL)
+		{
+			//Empty List Case
+			this->start=temp;
+		}
+		else
+		{
+			//General case
+			Node<int> *p=this->start;
+			while(p->get_next()!=NULL)
+			{
+				p=p->get_next();
+			}
+			p->set_next(temp);
+			temp->set_prev(p);
+		}
 	}
 	void insert_pos(T val,int pos)
 	{
+		//Inserts node with value val at the position pos
+		//Time Complexity = O(n)
+		//Space Complexity = O(1)
 
+		if(pos==1)
+		{
+			//Insert at beginning case
+			this->insert_start(val);
+		}
+		else if(start==NULL)
+		{
+			//but pos > 1
+			cout<<"INVALID POSITION!! NO INSERTION DONE."<<endl;
+		}
+		else		
+		{
+			//General case (atleast one node and pos>1)
+			int index=1;							//Current node number
+			Node<T> *temp=new Node<T>(val);
+			Node<T> *p=this->start;
+			while(1)
+			{
+				if((p==NULL)||(index==pos-1))		//We must stop at (pos-1)-th node
+				{
+					break;
+				}
+				p=p->get_next();
+				index++;
+			}
+			if(p==NULL)
+			{
+				//If we pos>(number of elements+1), then pos is invalid
+				cout<<"INVALID POSITION!! NO INSERTION DONE."<<endl;
+			}
+			else
+			{
+				//We have stopped at the previous node
+				Node<T> *q=p->get_next();
+				temp->set_next(q);
+				if(q!=NULL)
+					q->set_prev(temp);
+				p->set_next(temp);
+				temp->set_prev(p);
+			}
+		}
 	}
 	void delete_start()
 	{
@@ -100,7 +179,24 @@ public:
 	}
 	void print_list()
 	{
-		
+		Node<T> *p=this->start;
+		Node<T> *q=NULL;
+		cout<<"FORWARD TRAVERSAL :"<<endl;
+		while(p!=NULL)
+		{
+			cout<<p->get_data()<<" ";
+			q=p;
+			p=p->get_next();
+		}
+		cout<<endl;
+		//q = last node
+		cout<<"BACKWARD TRAVERSAL :"<<endl;
+		while(q!=start)
+		{
+			cout<<q->get_data()<<" ";
+			q=q->get_prev();
+		} 
+		cout<<q->get_data()<<endl;
 	}
 };
 
