@@ -79,7 +79,6 @@ public:
 	}
 	void insert_end(T val)
 	{
-		cout<<"INSERT END!!"<<endl;
 		//Inserts node with value val at the end of the list
 		//Time Complexity = O(n)
 		//Space Complexity = O(1)
@@ -151,15 +150,123 @@ public:
 	}
 	void delete_start()
 	{
+		//Deletes the node at the beginning of the list
+		//Time Complexity = O(1)
+		//Space Complexity = O(1)
 
+		if(this->start==NULL)
+		{
+			//Empty List Case
+			cout<<"LIST IS EMPTY!!!"<<endl;
+		}
+		else
+		{
+			//Storing the first node and taking start pointer to the second node
+			Node<T> *temp=this->start;
+			this->start=this->start->get_next();
+
+
+			//Isolating the first node and freeing its allocated memory
+			if(this->start)
+				this->start->set_prev(NULL);
+			temp->set_next(NULL);
+			delete(temp);
+		}
 	}
 	void delete_end()
 	{
+		//Deletes the node at the end of the list
+		//Time Complexity = O(n)
+		//Space Complexity = O(1)
+
+		if(this->start==NULL)
+		{
+			//Empty List Case
+			cout<<"List is Empty!!!"<<endl;
+		}
+		else if(this->start->get_next()==NULL)
+		{
+			//Only one element
+			//This will be same as deleting the first element
+			this->delete_start();
+
+		}
+		else
+		{
+			//Traversing to the node before the end node
+			Node<T> *temp=this->start;
+			while((temp->get_next())->get_next()!=NULL)
+			{
+				temp=temp->get_next();
+			}
+			//Loop will stop with temp being the penultimate node
+			Node<T> *p=temp->get_next();
+			if(p)
+			{
+				p->set_prev(NULL);
+			}
+			temp->set_next(NULL);
+			delete(p);
+		}
 
 	}
 	void delete_pos(int pos)
 	{
+		//Deletes the node at the position pos
+		//Time Complexity = O(n)
+		//Space Complexity = O(1)
 
+		if(this->start==NULL)
+		{
+			//Empty List Case
+			cout<<"List is Empty!!!"<<endl;
+		}
+		else if(pos==1)
+		{
+			//and list has atleast one element
+			//Same as delete beginning
+			this->delete_start();
+		}
+		else if(this->start->get_next()==NULL)
+		{
+			//Single element list case with pos > 1
+			cout<<"INVALID POSITION!! NO DELETION DONE."<<endl;
+		}
+		else
+		{
+			
+			//General case (List contains more than one node and pos >1)
+			int index=1;							//Current node number
+			Node<T> *p=this->start;
+			while(1)
+			{
+				if((p->get_next()==NULL)||(index==pos-1))		//We must stop at (pos-1)-th node
+				{
+					break;
+				}
+				p=p->get_next();
+				index++;
+			}
+			if(p->get_next()==NULL)
+			{
+				//If we pos>(number of elements), then pos is invalid
+				cout<<"INVALID POSITION!! NO DELETION DONE."<<endl;
+			}
+			else
+			{
+				//We have stopped at the previous node
+				Node<T> *temp=p->get_next();
+				Node<T> *q=temp->get_next();
+
+				p->set_next(q);
+				if(q)
+					q->set_prev(p);
+				temp->set_prev(NULL);
+				temp->set_next(NULL);
+				delete(temp);
+			}
+			
+		}
 	}
 	Node<T> *search(T val)
 	{
@@ -179,24 +286,28 @@ public:
 	}
 	void print_list()
 	{
-		Node<T> *p=this->start;
-		Node<T> *q=NULL;
-		cout<<"FORWARD TRAVERSAL :"<<endl;
-		while(p!=NULL)
+		if(this->start)
 		{
-			cout<<p->get_data()<<" ";
-			q=p;
-			p=p->get_next();
+			Node<T> *p=this->start;
+			Node<T> *q=NULL;
+			cout<<"FORWARD TRAVERSAL :"<<endl;
+			while(p!=NULL)
+			{
+				cout<<p->get_data()<<" ";
+				q=p;
+				p=p->get_next();
+			}
+			cout<<endl;
+			//q = last node
+			cout<<"BACKWARD TRAVERSAL :"<<endl;
+			while(q!=start)
+			{
+				cout<<q->get_data()<<" ";
+				q=q->get_prev();
+			} 
+			cout<<q->get_data()<<endl;
 		}
-		cout<<endl;
-		//q = last node
-		cout<<"BACKWARD TRAVERSAL :"<<endl;
-		while(q!=start)
-		{
-			cout<<q->get_data()<<" ";
-			q=q->get_prev();
-		} 
-		cout<<q->get_data()<<endl;
+		
 	}
 };
 

@@ -241,6 +241,7 @@ public:
 					//We have stopped at the previous node
 					Node<T> *temp=p->get_next();
 					p->set_next(temp->get_next());
+					temp->set_next(NULL)
 					delete(temp);
 				}
 			}
